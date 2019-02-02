@@ -2,7 +2,7 @@
 
 ## 后台部署
 
-./cmvnw.cmd clean compile package spring-boot::start
+./mvnw.cmd clean compile package spring-boot::start
 
 ## 前端部署
 
