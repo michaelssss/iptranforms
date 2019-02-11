@@ -1,9 +1,5 @@
-# m部署说明
+# 部署说明  
 
-## 后台部署
+## 单元测试与运行
 
-./cmvnw.cmd clean compile package spring-boot::start
-
-## 前端部署
-
-浏览器直接打开html
+.\mvnw.cmd clean compile package spring-boot::start

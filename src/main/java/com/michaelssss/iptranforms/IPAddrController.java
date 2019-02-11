@@ -12,8 +12,7 @@ public class IPAddrController {
   public Response transform(@RequestBody Request request) {
     Response response = new Response();
     try {
-      IPAddr ipAddr = IPAddr.newInstance(request.getAddr());
-      response.setResult(ipAddr.getInteger());
+      response.setResult(IPAddr.getInteger(request.getAddr()));
     } catch (RuntimeException e) {
       response.setResult(e.getMessage());
     }
