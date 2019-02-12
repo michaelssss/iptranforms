@@ -9,8 +9,8 @@ public class IPAddr {
   private static long takeCharsequnces2Byte(String reginoIp) {
     reginoIp = reginoIp + ".";
     char[] ipChars = reginoIp.toCharArray();
-    StringBuffer integerBits = new StringBuffer();
-    StringBuffer stringBuffer = new StringBuffer();
+    MyCharaterContainer integerBits = new MyCharaterContainer();
+    MyCharaterContainer stringBuffer = new MyCharaterContainer();
     boolean isParsingNum = false;
     boolean meetSpaceBetweenTwoNum = false;
     for (char c : ipChars) {
@@ -36,13 +36,13 @@ public class IPAddr {
         if (isParsingNum && isDot(c)) {
           meetSpaceBetweenTwoNum = false;
           isParsingNum = false;
-          int parsedNum = Integer.parseInt(stringBuffer.toString());
+          int parsedNum = Integer.parseUnsignedInt(stringBuffer.toString(), 10);
           if (!isLegalNum(parsedNum)) {
             throw new RuntimeException("check Ip Format Failed,over big");
           }
           integerBits
               .append(fillZero(Integer.toBinaryString(parsedNum)));
-          stringBuffer = new StringBuffer();
+          stringBuffer = new MyCharaterContainer();
         }
       }
     }
@@ -65,10 +65,10 @@ public class IPAddr {
     return takeCharsequnces2Byte(ip);
   }
 
-  private static String fillZero(String s) {
+  private static char[] fillZero(String s) {
     char[] chars = "00000000".toCharArray();
-    char[] toFillChars = new StringBuffer(s).reverse().toString().toCharArray();
-    System.arraycopy(toFillChars, 0, chars, 0, toFillChars.length);
-    return new StringBuffer(new String(chars)).reverse().toString();
+    char[] toFillChars = s.toCharArray();
+    System.arraycopy(toFillChars, 0, chars, 8 - toFillChars.length, toFillChars.length);
+    return chars;
   }
 }
